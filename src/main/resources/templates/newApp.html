@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/mainLayout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body><div class="container" layout:fragment="fragment">
+    <div class="row">
+        <div class="col-6" th:each="req:${applicationRequestList}" th:if="${!req.handled}">
+            <div class="card mt-3">
+                <div class="card-body">
+<!--                    <h5 th:style="${!req.handled} ? 'color:red'">Новая заявка</h5>-->
+                    <label class="card-title mx-2" th:if="${!req.handled}" style="font-weight: bold; color: red;">*(Новая)</label>
+                    <!--                    <input type="hidden" class="form-control" name="car_id" th:text="${req.isHandled()}">-->
+                    <label class="card-title mx-2">Заявка от:</label>
+                    <label th:text="${req.getUserName()}" style="font-weight: bold;"></label>
+                    <h6 class="card-subtitle mx-2 text-body-secondary" th:text="${req.getCourseName()}"></h6>
+                    <p class="card-text mx-2" th:text="${req.getCommentary()}"></p>
+                    <label class="card-title mx-2" style="font-weight: bold;">Тел:</label>
+                    <label th:text="${req.getPhone()}" style="font-weight: bold;"></label>
+                    <label><a th:href="@{'/app/details/' + ${req.getId()}}" class="card-link mx-4">Подробнее</a></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

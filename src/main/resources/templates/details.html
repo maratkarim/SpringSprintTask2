@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/mainLayout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container" layout:fragment="fragment">
+    <div th:if="${!app.handled}">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 style="color: red">*** Новая необработанная заявка ***</h3>
+            </div>
+        </div>
+    </div>
+    <div th:unless="${!app.handled}">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 style="color: green">Oбработанная заявка</h3>
+            </div>
+        </div>
+    </div>
+    <form th:action="@{'/app/update_app'}" method="post">
+        <input type="hidden" class="form-control" name="id" th:value="${app.getId()}">
+        <div style="padding-left: 23%; padding-right: 23%;">
+            <div>
+                <label class="form-label">ФИО:</label>
+                <input type="text" class="form-control" placeholder="ФИО:" name="user_name" th:value="${app.getUserName()}">
+                <br>
+            </div>
+            <div>
+                <label class="form-label">Курс:</label>
+                <select class="form-control form-select" placeholder="Выберите курс:" name="course" th:value="${app.getCourseName()}">
+                    <option>Java SE</option>
+                    <option>WEB</option>
+                    <option>Java EE</option>
+                    <option>Spring</option>
+                </select>
+                <br>
+            </div>
+            <div>
+                <label class="form-label">Телефон:</label>
+                <input type="text" class="form-control" placeholder="+7(7__)_______:" name="phone" th:value="${app.getPhone()}">
+                <br>
+            </div>
+            <div>
+                <label class="form-label">Комментарии:</label>
+                <textarea class="form-control" placeholder="Комментарии" name="comment" th:value="${app.getCommentary()}"></textarea>
+                <br>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Обработать заявку</button>
+            </div>
+        </div>
+    </form>
+    <form th:action="@{'/app/delete_app'}" method="post">
+        <input type="hidden" th:value="${app.getId()}" name="app_id">
+        <br>
+        <div style="padding-left: 23%; padding-right: 23%;">
+            <button type="submit" class="btn btn-danger">Удалить заявку</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

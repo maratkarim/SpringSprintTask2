@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/mainLayout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container" layout:fragment="fragment">
+    <form th:action="@{'/app/add_Req'}" method="post">
+        <div style="padding-left: 23%; padding-right: 23%;">
+            <div>
+                <label class="form-label">ФИО:</label>
+                <input type="text" class="form-control" placeholder="ФИО:" name="user_name">
+                <br>
+            </div>
+            <div>
+                <label class="form-label">Курс:</label>
+                <select class="form-control form-select" placeholder="Выберите курс:" name="course">
+                    <option>Java SE</option>
+                    <option>WEB</option>
+                    <option>Java EE</option>
+                    <option>Spring</option>
+                </select>
+                <br>
+            </div>
+            <div>
+                <label class="form-label">Телефон:</label>
+                <input type="text" class="form-control" placeholder="+7(7__)_______:" name="phone">
+                <br>
+            </div>
+            <div>
+                <label class="form-label">Комментарии:</label>
+                <textarea class="form-control" placeholder="Комментарии" name="comment"></textarea>
+                <br>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Добавить заявку</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
